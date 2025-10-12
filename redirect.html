@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adicionar ao Calendário</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Carregando calendário...</h1>
+    <p>Se o aplicativo não abrir automaticamente, clique no link abaixo para adicionar:</p>
+    <a id="fallback-link" href="#">Adicionar manualmente</a>
+
+    <script>
+        // ****************************************************************************
+        // ** SUBSTITUA ESTA URL PELA SUA URL WEB CALENDAR REAL! **
+        // ****************************************************************************
+        var webcalUrl = "webcal://gio.it.tab.digital/remote.php/dav/public-calendars/ndWqCDcX9dqGXeS9?export";
+
+        // Tenta forçar a abertura do protocolo webcal (funciona no iOS/iPadOS)
+        window.location.replace(webcalUrl);
+
+        // Atualiza o link de fallback
+        document.getElementById('fallback-link').href = webcalUrl;
+
+        // Opcional: Define um pequeno timeout para o caso de o navegador ser lento
+        setTimeout(function() {
+            document.body.innerHTML += '<p>O sistema operacional do seu dispositivo deve abrir o aplicativo de calendário agora.</p>';
+        }, 1000);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Enviar Agendamento por E-mail</title>
+</head>
+<body style="font-family:Arial; text-align:center; padding:30px;">
+  <h2>📅 Agendamento Automático</h2>
+  <p>Deseja enviar este agendamento por e-mail?</p>
+  <button onclick="enviarEmail()">✉️ Enviar por E-mail</button>
+
+  <script>
+  function enviarEmail() {
+      const assunto = encodeURIComponent("Agendamento Automático ✅");
+      const corpo = encodeURIComponent(
+          "Segue o link do seu agendamento:\n\n" +
+          "https://bhettsheimeir.github.io/Agendamento/evento.ics\n\n" +
+          "Abra e adicione ao seu calendário 📅"
+      );
+      window.location.href = `mailto:?subject=${assunto}&body=${corpo}`;
+  }
+  </script>
+</body>
+</html>

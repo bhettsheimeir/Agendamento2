@@ -1,74 +1,271 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Enviar Agendamento para iPhone</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .container {
-      background: white;
-      padding: 30px 40px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    h2 {
-      color: #333;
-      margin-bottom: 20px;
-    }
-    button {
-      background-color: #007bff;
-      border: none;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: 0.3s;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    p {
-      margin-top: 20px;
-      color: #555;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar Agendamento por E-mail</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .calendar-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        .info-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: left;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            margin: 10px 0;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .loading {
+            display: none;
+            margin: 20px 0;
+            color: #4CAF50;
+            font-weight: 600;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4CAF50;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .result {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .auto-send {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Enviar Agendamento para iPhone</h2>
-    <button onclick="enviarICS()">📅 Enviar Agendamento</button>
-    <p id="status"></p>
-  </div>
+    <div class="container">
+        <div class="calendar-icon">📅</div>
+        <h1>Agendamento Automático</h1>
+        <p class="subtitle">Enviar agendamento para o iPhone por e-mail</p>
+        
+        <div class="info-card">
+            <div class="info-item">
+                <span>📧 Destinatário:</span>
+                <strong>bhettsheimeir@icloud.com</strong>
+            </div>
+            <div class="info-item">
+                <span>👤 Remetente:</span>
+                <strong>bhettsheimeir@gmail.com</strong>
+            </div>
+            <div class="info-item">
+                <span>📎 Anexo:</span>
+                <strong>agendamento.ics</strong>
+            </div>
+        </div>
 
-  <script>
-    async function enviarICS() {
-      const status = document.getElementById("status");
-      status.textContent = "Enviando agendamento...";
-      try {
-        const response = await fetch("/enviar-iphone", { method: "POST" });
-        if (response.ok) {
-          // Atualizado para buscar o arquivo correto
-          window.location.href = "https://bhettsheimeir.github.io/Agendamento2/agendamento.ics";
-          status.textContent = "Agendamento enviado com sucesso!";
-        } else {
-          status.textContent = "Falha ao enviar o agendamento.";
+        <div class="auto-send">
+            ⚡ <strong>Envio automático em 3 segundos...</strong>
+        </div>
+
+        <button class="btn" onclick="enviarEmailComAnexo()">
+            <span>📎</span>
+            Enviar Agendamento por E-mail
+        </button>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            Enviando e-mail com anexo...
+        </div>
+
+        <div id="resultado" class="result"></div>
+    </div>
+
+    <script>
+        const SCRIPT_URL = 'https://script.google.com/macros/u/1/s/AKfycbwM6POPbzAatYUEKGLuty8y2hBNyiJnrgreB23hiCgby_7QwfoufFqHH7_TQSWX-1_C/exec';
+
+        // Função principal para enviar e-mail
+        async function enviarEmailComAnexo() {
+            const loading = document.getElementById('loading');
+            const resultado = document.getElementById('resultado');
+            const autoSend = document.querySelector('.auto-send');
+            
+            // Esconder mensagem de auto-send se clicou manualmente
+            autoSend.style.display = 'none';
+            
+            loading.style.display = 'block';
+            resultado.style.display = 'none';
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        destinatario: 'bhettsheimeir@icloud.com',
+                        assunto: 'Agendamento Automático ✅'
+                    })
+                });
+
+                const data = await response.json();
+                
+                loading.style.display = 'none';
+                resultado.style.display = 'block';
+                
+                if (data.status === 'success') {
+                    resultado.className = 'result success';
+                    resultado.innerHTML = '✅ ' + data.message + '<br><small>Verifique sua caixa de entrada e spam</small>';
+                } else {
+                    resultado.className = 'result error';
+                    resultado.innerHTML = '❌ ' + data.message;
+                }
+            } catch (error) {
+                loading.style.display = 'none';
+                resultado.style.display = 'block';
+                resultado.className = 'result error';
+                resultado.innerHTML = '❌ Erro de conexão. Tente novamente.';
+            }
         }
-      } catch (error) {
-        status.textContent = "Erro ao enviar o agendamento.";
-        console.error(error);
-      }
-    }
-  </script>
+
+        // Envio automático após 3 segundos
+        document.addEventListener('DOMContentLoaded', function() {
+            const resultado = document.getElementById('resultado');
+            resultado.style.display = 'block';
+            resultado.className = 'result success';
+            resultado.innerHTML = '💡 Clique no botão ou aguarde o envio automático...';
+            
+            // Envio automático após 3 segundos
+            setTimeout(() => {
+                const autoSend = document.querySelector('.auto-send');
+                autoSend.innerHTML = '⚡ <strong>Enviando automaticamente...</strong>';
+                enviarEmailComAnexo();
+            }, 3000);
+        });
+    </script>
 </body>
 </html>

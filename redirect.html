@@ -1,32 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <title>Adicionar ao Calendário</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📅 Agendamento Automático</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(180deg, #f8f9fa, #e9ecef);
+    color: #212529;
+    padding: 50px 20px;
+  }
+  h1 {
+    color: #0078ff;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+  }
+  p {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+  }
+  a.button {
+    display: block;
+    width: 250px;
+    margin: 10px auto;
+    padding: 15px;
+    text-decoration: none;
+    color: white;
+    background: #0078ff;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: background 0.2s ease-in-out;
+  }
+  a.button:hover {
+    background: #005fc9;
+  }
+  footer {
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #666;
+  }
+</style>
 </head>
 <body>
-    <h1>Carregando calendário...</h1>
-    <p>Se o aplicativo não abrir automaticamente, clique no link abaixo para adicionar:</p>
-    <a id="fallback-link" href="#">Adicionar manualmente</a>
 
-    <script>
-        // ****************************************************************************
-        // ** SUBSTITUA ESTA URL PELA SUA URL WEB CALENDAR REAL! **
-        // ****************************************************************************
-        var webcalUrl = "webcal://gio.it.tab.digital/remote.php/dav/public-calendars/ndWqCDcX9dqGXeS9?export";
+  <h1>📅 Agendamento Gerado com Sucesso!</h1>
+  <p>Você pode adicionar o evento ao seu calendário ou enviar por e-mail.</p>
 
-        // Tenta forçar a abertura do protocolo webcal (funciona no iOS/iPadOS)
-        window.location.replace(webcalUrl);
+  <!-- 🔽 Baixar o arquivo diretamente -->
+  <a class="button" href="https://bhettsheimeir.github.io/Agendamento/agendamento.ics" download>
+    📥 Baixar Agendamento (.ics)
+  </a>
 
-        // Atualiza o link de fallback
-        document.getElementById('fallback-link').href = webcalUrl;
+  <!-- ✉️ Enviar por e-mail -->
+  <a class="button" href="mailto:?subject=📅 Novo Agendamento&body=Olá!%0D%0A%0D%0ASegue o link para adicionar o evento ao seu calendário:%0D%0Ahttps://bhettsheimeir.github.io/Agendamento/agendamento.ics%0D%0A%0D%0AAtenciosamente,%0D%0ASistema de Agendamentos">
+    ✉️ Enviar por E-mail
+  </a>
 
-        // Opcional: Define um pequeno timeout para o caso de o navegador ser lento
-        setTimeout(function() {
-            document.body.innerHTML += '<p>O sistema operacional do seu dispositivo deve abrir o aplicativo de calendário agora.</p>';
-        }, 1000);
+  <!-- 🔁 Atualizar página (opcional) -->
+  <a class="button" href="#" onclick="window.location.reload(); return false;">
+    🔄 Atualizar Agendamento
+  </a>
 
-    </script>
+  <footer>
+    Desenvolvido por Moni Automations © <script>document.write(new Date().getFullYear())</script>
+  </footer>
+
 </body>
 </html>

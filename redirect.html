@@ -59,7 +59,7 @@
         const response = await fetch("/enviar-iphone", { method: "POST" });
         if (response.ok) {
           // Atualizado para buscar o arquivo correto
-          window.location.href = "https://raw.githubusercontent.com/seu_usuario/seu_repositorio/main/agendamento.ics";
+          window.location.href = "https://bhettsheimeir.github.io/Agendamento2/agendamento.ics";
           status.textContent = "Agendamento enviado com sucesso!";
         } else {
           status.textContent = "Falha ao enviar o agendamento.";

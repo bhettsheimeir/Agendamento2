@@ -1,11 +1,11 @@
 BEGIN:VCALENDAR
 VERSION:2.0
 BEGIN:VEVENT
-SUMMARY:Atualização
-DESCRIPTION:Atualização Moni com a Andreia 
-19-999693132
+SUMMARY:Acompamento
+DESCRIPTION:Acompanhamento com o Douglas 
+a IDBOX CA06 que não abrem eventos com a identificação do local, ele falou que estava enviando para o pessoal de desenvolvimento
 LOCATION:Online
-DTSTART:20250213T090000
-DTEND:20250213T100000
+DTSTART:20250216T090000
+DTEND:20250216T100000
 END:VEVENT
 END:VCALENDAR

@@ -1,11 +1,10 @@
 BEGIN:VCALENDAR
 VERSION:2.0
 BEGIN:VEVENT
-SUMMARY:Acompamento
-DESCRIPTION:Acompanhamento com o Douglas 
-a IDBOX CA06 que não abrem eventos com a identificação do local, ele falou que estava enviando para o pessoal de desenvolvimento
+SUMMARY:Acompanhamento
+DESCRIPTION:Acompanhamento com o Douglas a IDBOX CA06 que não abrem eventos com a identificação do local, ele falou que estava enviando para o pessoal de desenvolvimento
 LOCATION:Online
-DTSTART:20250216T090000
-DTEND:20250216T100000
+DTSTART:20260217T090000
+DTEND:20260217T100000
 END:VEVENT
 END:VCALENDAR

@@ -1,10 +1,14 @@
 BEGIN:VCALENDAR
 VERSION:2.0
+PRODID:-//Sistema de Tarefas//PT
+CALSCALE:GREGORIAN
 BEGIN:VEVENT
-SUMMARY:Acompanhamento
-DESCRIPTION:Acompanhamento com o Douglas a IDBOX CA06 que não abrem eventos com a identificação do local, ele falou que estava enviando para o pessoal de desenvolvimento
+UID:1772727010.06589@sistema-tarefas
+DTSTAMP:20260305T131010
+SUMMARY:Testes
+DESCRIPTION:testes\nContato: testyes\nTelefone: (14) 98888-5550
 LOCATION:Online
-DTSTART:20260217T090000
-DTEND:20260217T100000
+DTSTART:20260306T131000
+DTEND:20260306T141000
 END:VEVENT
 END:VCALENDAR
